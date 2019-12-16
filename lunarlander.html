@@ -1,0 +1,69 @@
+<html>
+  <!DOCTYPE html>
+
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="portfolio.css" />
+  <head>
+  <title>LunarLander</title>
+  <script src="p5.min.js"></script>
+  <script src="p5setup.js"></script>
+
+</head>
+<body>
+
+<div class="topnav">
+        <a class="active" href="#home">Lunar Lander</a>
+        <a href="sprechblase.html">Halloween Sprechblase</a>
+        <a href="index.html">Home</a>
+        <a href="magicball.html">Magic8Ball</a>
+      </div>
+
+</br>
+<h2>LunarLander.js</h2>
+
+<p>
+  Unser erstes kleines Spiel im ersten Semester war der Lunar Lander.</br>
+  Erist eine kleine Anwendung, in der man eine Rakete sanft auf den
+  Boden landen muss.<div id="rakete">
+        <img src="Rakete.jpg" width="350px" height="350px" />
+      </div> <br /></p>
+      <p>
+  Gesteuert wird dieser mit den Pfeiltasten der Tastatur und er besitzt einen
+  Start und Reset Knopf.
+</p>
+<div id="knopf">
+        <img src="Startstop.jpg" width="150px" height="150px" />
+      </div>
+<p>
+  Wenn Start gedrückt wird, schwebt die Rakete zu Boden.<br />
+  Der Tank leert sich mit der Betätigung der Preiltasten
+</p>
+<div id="pfeile">
+  <img src="Pfeile.png" width="200px" height="200px" />
+</div>
+<p>
+  Hat die Tankfüllung 0% erreicht oder setzt die Rakete zu schnell auf, hat man
+  das Spiel verloren.<br/>
+</p>
+<div id="tot">
+        <img src="tot.jpg" width="200px" height="200px" />
+      </div>
+      <p>
+          Um das Spiel neu zu starten, betätigt man Reset und dann erneut Start.
+      </p>
+      <p>Hier könnt ihr eine Runde Probe Spielen :B</p>
+     <div id="p5canvas" class="spiel">
+      
+        <script src="lunarLander.js"></script>
+     </div>
+      </body>
+      <footer>
+      </br>
+          <div id="footer">Entstanden durch Annes flinke Hände & mit Hilfe von
+              <a href="https://developer.mozilla.org/de/docs/Web/CSS/CSS_Referenz">CSS Reference </a>
+              &
+              <a href="https://developer.mozilla.org/de/docs/Web/HTML/Element/picture">HTML Reference </a>
+          </div>
+          
+        </footer>
+      </html>
