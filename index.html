@@ -1,0 +1,369 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My Minimensch</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body>
+    <!-- HEADER SECTION -->
+    <section id="header" class="bg-section">
+      <div class="section-stage" style="--design-w: 1200px; --design-h: 720px;">
+        <div class="section-stage__inner">
+          <!-- LAYERS (control per layer with CSS vars) -->
+          <img class="layer"
+               src="media/Anne_BG.png" alt=""
+               style="--z:1; --alpha:1; --x:0px; --y:0px; --sx:1.08; --sy:1.0; --rot:0deg;" />
+          <img class="layer"
+               src="media/Startseite.png" alt=""
+               style="--z:2; --alpha:1.0; --x:380px; --y:40px; --sx:0.8; --sy:0.8; --rot:0deg;" />
+          <img class="layer"
+               src="media/2.png" alt=""
+               style="--z:3; --alpha:1.0; --x:0px; --y:300px; --sx:1.1; --sy:1; --rot:0deg;" />
+        </div>
+              <!-- CONTENT -->
+        <div class="container">
+          <header class="nav-bar">
+            <div class="nav-left">
+              <span class="dot"></span>
+              <strong>/home</strong>
+            </div>
+            <div class="nav-buttons">
+              <button data-target="#about">About</button>
+              <button data-target="#projects">Projects</button>
+              <button data-target="#notes">?</button>
+              <button data-target="#contact">Contact</button>
+            </div>
+          </header>
+          <h1 class="hero">My Minimensch</h1>
+          <p class="lead">Blah Blah Blah.</p>
+          <section id="contact-icons" class="contact">
+            <div class="contact-links">
+              <a href="mailto:mag.dierking@gmail.com" title="Email" target="_blank">
+                <i data-lucide="mail"></i>
+              </a>
+              <a href="https://github.com/magnusdierking" title="GitHub" target="_blank">
+                <i data-lucide="github"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/magnusdierking" title="LinkedIn" target="_blank">
+                <i data-lucide="linkedin"></i>
+              </a>
+            </div>
+          </section>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="bg-section">
+      <div class="section-stage" style="--design-w: 1200px; --design-h: 1600px; --bg-color:#F5F1E9;">
+        <div class="section-stage__inner">
+          <!-- LAYERS -->
+           <img class="layer"
+               src="media/3.png" alt=""
+               style="--z:1; --alpha:1.0; --x:0px; --y:740px;" />
+          <!-- CONTENT -->
+        </div>
+
+
+        <div class="container cards-wrap">
+          <h2>Projects</h2>
+          <div class="cards">
+            <!-- Card Boelle Bande-->
+            <article class="frame-card"
+              style="--ar:4/3; --back:url('media/4.png');
+                    --img:url('media/darmstadt/painting_2.png'); --img-hover:url('media/darmstadt/darmstadt.png');
+                    --frame:url('media/6.png');">
+              <div class="frame-card__stage"
+                  style="
+                    /* tweak until it fits perfectly */
+                    --t-origin:center;
+                    /* background */
+                    --back-x:0px; --back-y:0px; --back-scale:0.8; --back-rot:10deg;
+                    /* main image (default state) */
+                    --img-x:0px; --img-y:0px; --img-scale:0.75; --img-rot:0deg;
+                    /* hover image (if different alignment) */
+                    --hover-x:0px; --hover-y:0px; --hover-scale:0.8; --hover-rot:0deg;
+                    /* frame overlay (usually identity, but adjustable) */
+                    --frame-x:0px; --frame-y:0px; --frame-scale:0.2; --frame-rot:0deg;
+                  ">
+                <div class="swap-main"></div>
+                <div class="swap-hover"></div>
+                <div class="frame-card__stage-overlay"></div>
+              </div>
+            </article>
+            <div class="modal" id="projectModal" aria-hidden="true" role="dialog" aria-modal="true">
+              <div class="modal__overlay" data-close-modal></div>
+              <div class="modal__dialog" role="document" aria-labelledby="projectModalTitle">
+                <button class="modal__close" type="button" aria-label="Close" data-close-modal>&times;</button>
+                <div class="modal__media" id="projectModalImage" aria-hidden="true"></div>
+                <h3 class="modal__title" id="projectModalTitle"></h3>
+                <p class="modal__desc" id="projectModalDesc"></p>
+              </div>
+            </div>
+            <!-- Card Fopo-->
+            <article class="frame-card"
+              style="--ar:4/3; --back:url('media/4.png');
+                    --img:url('media/Fopo/fopo_paint.png'); --img-hover:url('media/Fopo/Fopo-1.png');
+                    --frame:url('media/7.png');">
+              <div class="frame-card__stage"
+                  style="
+                    /* tweak until it fits perfectly */
+                    --t-origin:center;
+                    /* background */
+                    --back-x:-4px; --back-y:2px; --back-scale:0.2; --back-rot:10deg;
+                    /* main image (default state) */
+                    --img-x:0px; --img-y:0px; --img-scale:0.7; --img-rot:-2deg;
+                    /* hover image (if different alignment) */
+                    --hover-x:0px; --hover-y:0px; --hover-scale:0.5; --hover-rot:-3deg;
+                    /* frame overlay (usually identity, but adjustable) */
+                    --frame-x:0px; --frame-y:0px; --frame-scale:0.5; --frame-rot:0deg;
+                  ">
+                <div class="swap-main"></div>
+                <div class="swap-hover"></div>
+                <div class="frame-card__stage-overlay"></div>
+              </div>
+            </article>
+            <!-- Card Wortschatz-->
+            <article class="frame-card"
+              style="--ar:4/3; --back:url('media/4.png');
+                    --img:url('media/Wortschatz/wortschatz_paint.png'); --img-hover:url('media/Wortschatz/wortschatz.png');
+                    --frame:url('media/8.png');">
+              <div class="frame-card__stage"
+                  style="
+                    /* tweak until it fits perfectly */
+                    --t-origin:center;
+                    /* background */
+                    --back-x:-4px; --back-y:2px; --back-scale:0.2; --back-rot:10deg;
+                    /* main image (default state) */
+                    --img-x:0px; --img-y:-0px; --img-scale:0.75; --img-rot:0deg;
+                    /* hover image (if different alignment) */
+                    --hover-x:-10px; --hover-y:0px; --hover-scale:0.75; --hover-rot:-0deg;
+                    /* frame overlay (usually identity, but adjustable) */
+                    --frame-x:0px; --frame-y:0px; --frame-scale:0.5; --frame-rot:0deg;
+                  ">
+                <div class="swap-main"></div>
+                <div class="swap-hover"></div>
+                <div class="frame-card__stage-overlay"></div>
+              </div>
+            </article>
+            <!-- Card Emphatica -->
+            <article class="frame-card"
+              style="--ar:4/3; --back:url('media/4.png');
+                    --img:url('media/Emphatika/Projekt\ Vorschau-paint.png'); --img-hover:url('media/Emphatika/Emphatica-Vorschau.png');
+                    --frame:url('media/5.png');">
+              <div class="frame-card__stage"
+                  style="
+                    /* tweak until it fits perfectly */
+                    --t-origin:center;
+                    /* background */
+                    --back-x:-4px; --back-y:2px; --back-scale:0.2; --back-rot:10deg;
+                    /* main image (default state) */
+                    --img-x:0px; --img-y:0px; --img-scale:0.75; --img-rot:0deg;
+                    /* hover image (if different alignment) */
+                    --hover-x:0px; --hover-y:-0px; --hover-scale:0.75; --hover-rot:-0deg;
+                    /* frame overlay (usually identity, but adjustable) */
+                    --frame-x:0px; --frame-y:0px; --frame-scale:0.5; --frame-rot:0deg;
+                  ">
+                <div class="swap-main"></div>
+                <div class="swap-hover"></div>
+                <div class="frame-card__stage-overlay"></div>
+              </div>
+            </article>
+            <!-- Card Sion-->
+            <article class="frame-card"
+              style="--ar:4/3; --back:url('media/6.png');
+                    --img:url('media/SION/sion.png'); --img-hover:url('media/SION/sion_paint.png');
+                    --frame:url('media/6.png');">
+              <div class="frame-card__stage"
+                  style="
+                    /* tweak until it fits perfectly */
+                    --t-origin:center;
+                    /* background */
+                    --back-x:-4px; --back-y:2px; --back-scale:0.2; --back-rot:10deg;
+                    /* main image (default state) */
+                    --img-x:0px; --img-y:-0px; --img-scale:0.75; --img-rot:0deg;
+                    /* hover image (if different alignment) */
+                    --hover-x:0px; --hover-y:0px; --hover-scale:0.75; --hover-rot:0deg;
+                    /* frame overlay (usually identity, but adjustable) */
+                    --frame-x:0px; --frame-y:0px; --frame-scale:0.5; --frame-rot:0deg;
+                  ">
+                <div class="swap-main"></div>
+                <div class="swap-hover"></div>
+                <div class="frame-card__stage-overlay"></div>
+              </div>
+            </article>
+            <!-- Card EEco-->
+            <article class="frame-card"
+              style="--ar:4/3; --back:url('media/6.png');
+                    --img:url('media/eeco/eeco_paint.png'); --img-hover:url('media/eeco/eeco.png');
+                    --frame:url('media/6.png');">
+              <div class="frame-card__stage"
+                  style="
+                    /* tweak until it fits perfectly */
+                    --t-origin:center;
+                    /* background */
+                    --back-x:-4px; --back-y:2px; --back-scale:0.2; --back-rot:10deg;
+                    /* main image (default state) */
+                    --img-x:0px; --img-y:-0px; --img-scale:0.7; --img-rot:0deg;
+                    /* hover image (if different alignment) */
+                    --hover-x:0px; --hover-y:0px; --hover-scale:0.7; --hover-rot:0deg;
+                    /* frame overlay (usually identity, but adjustable) */
+                    --frame-x:0px; --frame-y:0px; --frame-scale:0.5; --frame-rot:0deg;
+                  ">
+                <div class="swap-main"></div>
+                <div class="swap-hover"></div>
+                <div class="frame-card__stage-overlay"></div>
+              </div>
+            </article>
+          </div>
+          <!-- Cards -->
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <!-- <section id="about" class="bg-section"> -->
+      <!-- <div class="section-stage" style="--design-w: 1200px; --design-h: 340px; --bg-color:#AEC4D0;"> -->
+        <!-- <div class="section-stage__inner"> -->
+          <!-- LAYERS (example different offsets) -->
+        <!-- <img class="layer" -->
+            <!-- src="media/Allgemeine-Grafiken/me.png" alt="" -->
+            <!-- style="--z:1; --alpha:1.0; --x:0px; --y:0px; --sx:1; --sy:1.0;" /> -->
+          <!-- CONTENT -->
+          <!-- <div class="container"> -->
+            
+            <!-- </p> -->
+          <!-- </div> -->
+        <!-- </div> -->
+      <!-- </div> -->
+    <section class="sticker-section" aria-label="Interactive sticker wall" >
+      <!-- Central copy -->
+      <div class="center-copy" aria-live="polite" aria-atomic="true">
+      <div class="copy-card">
+      <h2 id="copyTitle">Explore the wall</h2>
+      <p id="copyText">Hover or focus a sticker to learn more.</p>
+      </div>
+      </div>
+
+      <img class="sticker-me" tabindex="0"
+      src="media/Allgemeine-Grafiken/Sticker/Me.png"
+      data-hover="media/Allgemeine-Grafiken/Sticker/Me-2.png"
+      alt="Rocket"
+      style="--x: 50%; --y: 45%; --w: 500px; --r: 0deg;"
+      data-title="Buchmensch"
+      data-text="Fast, lightweight, and ready to ship." />
+
+      <img class="sticker" tabindex="0"
+      src="media/Allgemeine-Grafiken/Sticker/Buch.png"
+      alt="Rocket"
+      style="--x: 14%; --y: 28%; --w: 120px; --r: -8deg;"
+      data-title="Buchmensch"
+      data-text="Fast, lightweight, and ready to ship." />
+
+
+      <img class="sticker" tabindex="0"
+      src="media/Allgemeine-Grafiken/Sticker/Gaming.png"
+      alt="Headphones"
+      style="--x: 8%; --y: 78%; --w: 110px; --r: 17deg;"
+      data-title="Gamingmensch"
+      data-text="Designed for focus, tuned for comfort." />
+
+      <img class="sticker" tabindex="0"
+      src="media/Allgemeine-Grafiken/Sticker/Kette.png"
+      alt="Kette"
+      style="--x: 25%; --y: 69%; --w: 120px; --r: -38deg;"
+      data-title="Kettenmensch"
+      data-text="UV400 protection with a laid‑back fit." />
+
+      <img class="sticker" tabindex="0"
+      src="media/Allgemeine-Grafiken/Sticker/Kochlöffel.png"
+      alt="Kochlöffel"
+      style="--x: 11%; --y: 56%; --w: 160px; --r: -38deg;"
+      data-title="Kochmensch"
+      data-text="UV400 protection with a laid‑back fit." />
+
+      <img class="sticker" tabindex="0"
+      src="media/Allgemeine-Grafiken/Sticker/Laptop 1.png"
+      alt="Laptop"
+      style="--x: 31%; --y: 50%; --w: 120px; --r: -3deg;"
+      data-title="Laptopmensch"
+      data-text="UV400 protection with a laid‑back fit." />
+
+      <img class="sticker" tabindex="0"
+      src="media/Allgemeine-Grafiken/Sticker/Kaffee.png"
+      alt="Camera"
+      style="--x: 75%; --y: 20%; --w: 130px; --r: 14deg;"
+      data-title="Kaffeemensch"
+      data-text="Brewed to perfection, just for you." />
+
+      <img class="sticker" tabindex="0"
+      src="media/Allgemeine-Grafiken/Sticker/Lipgloss.png"
+      alt="Camera"
+      style="--x: 27%; --y: 20%; --w: 130px; --r: -15deg;"
+      data-title="Kosmetikmensch"
+      data-text="Brewed to perfection, just for you." />
+
+      <!-- Right -->
+      <img class="sticker" tabindex="0"
+      src="media/Allgemeine-Grafiken/Sticker/Parfüm.png"
+      alt="Perfume"
+      style="--x: 91%; --y: 36%; --w: 120px; --r: -12deg;"
+      data-title="Parfümmensch"
+      data-text="UV400 protection with a laid‑back fit." />
+
+      <img class="sticker" tabindex="0"
+      src="media/Allgemeine-Grafiken/Sticker/Kopfhörer 2.png"
+      alt="Kopfhörer"
+      style="--x: 77%; --y: 46%; --w: 120px; --r: -12deg;"
+      data-title="Kopfhörermensch"
+      data-text="UV400 protection with a laid‑back fit." />
+
+      <img class="sticker" tabindex="0"
+      src="media/Allgemeine-Grafiken/Sticker/Kindle.png"
+      alt="Kindle"
+      style="--x: 74%; --y: 69%; --w: 120px; --r: 12deg;"
+      data-title="Kindlemensch"
+      data-text="Your perfect reading companion." />
+
+      <img class="sticker" tabindex="0"
+      src="media/Allgemeine-Grafiken/Sticker/Dackel.png"
+      alt="Dackel"
+      style="--x: 90%; --y: 69%; --w: 160px; --r: -12deg;"
+      data-title="Dackelmensch"
+      data-text="Your perfect reading companion." />
+
+
+
+      <!-- Add as many as you like following the pattern above. -->
+      </section>
+    <!-- </section> -->
+    
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="bg-section">
+      <div class="section-stage" style="--design-w: 1200px; --design-h: 320px;">
+        <div class="section-stage__inner">
+          <!-- LAYERS -->
+          <img class="layer"
+              src="media/Anne_BG.png" alt=""
+              style="--z:1; --alpha:1.0; --x:0px; --y:0px; --sx:3; --sy:3.0;" />
+          <img class="layer"
+               src="media/4.png" alt=""
+               style="--z:1; --alpha:1.0; --x:0px; --y:-100px;" />
+          <!-- CONTENT -->
+          <div class="container">
+            <h2>Contact</h2>
+            <p>Drop a line!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="main.js"></script>
+  </body>
+</html>

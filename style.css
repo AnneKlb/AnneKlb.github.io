@@ -1,0 +1,394 @@
+:root{
+  --content-max: 900px;
+  --content-pad: 24px;
+  --bg: #0b0f16;
+  --fg: #f3f3f3;
+  --muted: #98a2b3;
+  --accent: #6ee7b7;
+  /* Color theme stuff */
+  --reddish: #280009;
+  --beige: #f5f1ea;
+  --blueish: #AEC4D0;
+  --lightgreen: #405B4D;
+  --darkgreen: #133323;
+  --pink: #F5C3D8;
+}
+
+/* Basic layout */
+*{ box-sizing: border-box; }
+html,body{ height:100%; }
+body{
+  margin:0; font: 16px/1.5 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji;
+  color: var(--fg);
+  background: var(--bg);
+}
+
+
+/* Sections */
+.bg-section{
+  position: relative;
+  overflow: hidden; 
+  scroll-margin-top: 64px;
+  display:block;
+  background: transparent !important; 
+  isolation: isolate;
+} 
+.bg-section::before,
+.section-stage::before { content:none !important; }
+
+
+/* The fixed-size design space that we scale */
+.section-stage{
+  /* width: var(--design-w, 1200px); */
+  width: min(100%, var(--design-w, 1200px));
+  height: calc(var(--design-h, 720px) * var(--stage-scale, 1));
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-color, transparent);
+}
+
+/* Inner scales uniformly from the top-left origin */
+.section-stage__inner{
+  position: absolute;
+  inset: 0;
+  transform-origin: top left;
+  transform: scale(var(--stage-scale, 1));
+}
+.section-stage__inner .container { max-width: none; width: var(--design-w); }
+
+
+/* Layered PNGs (full design space) */
+.layer{
+  position: absolute;
+  left: 0; top: 0;
+  mix-blend-mode: normal;
+  width: var(--design-w, 1200px);
+  height: var(--design-h, 720px);
+  object-fit: contain;
+  pointer-events: none;
+  z-index: var(--z, 1);
+  opacity: var(--alpha, 1);
+  /* per-layer alignment controls (design pixels/degrees) */
+  transform: translate(var(--x, 0px), var(--y, 0px)) rotate(var(--rot, 0deg)) scale(var(--sx, 1), var(--sy, 1));
+}
+
+/* Content sits above layers */
+.container{
+  position: relative;
+  z-index: 10;
+  max-width: max(var(--content-max), var(--design-w, 1200px));
+  margin: 0 auto;
+  padding: calc(var(--content-pad) * 2) var(--content-pad);
+}
+.hero{ font-size: clamp(28px, 5vw, 48px); margin: 48px 0 8px; }
+.lead{ color: #280009; max-width: 8%; }
+
+/* Nav */
+.nav-bar{
+  display:flex; align-items:center; gap:16px; justify-content: space-between;
+}
+.nav-left{ display:flex; align-items:center; gap:8px; }
+.dot{ width:8px; height:8px; border-radius:999px; background:var(--accent); box-shadow:0 0 12px var(--accent); }
+.nav-buttons{ display:flex; gap:12px; }
+.nav-buttons button{
+  background: #405B4D;
+  color: var(--fg);
+  border: 1px solid rgba(255,255,255,.08);
+  padding: 6px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.nav-buttons button:hover{ background:#172033; }
+
+/* Cards */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(360px,1fr));
+  gap:0px;
+
+  margin:0 auto;
+}
+.card{
+  background: #0e1523;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 0px;
+  padding: 0px;
+}
+
+.cards-wrap{ position:relative; 
+             z-index:2; 
+             width:100%;}
+
+/* let stage height follow the bigger of bg or cards */
+.section-stage{
+  --bg-h: calc(var(--design-h,720px) * var(--stage-scale,1));
+  height: max(var(--bg-h), var(--cards-h, 0px));
+  position:relative; margin:0 auto; overflow:hidden;
+  background: var(--bg-color, transparent);
+}
+.section-stage__inner{ position:absolute; inset:0; transform-origin:top left; transform:scale(var(--stage-scale,1)); }
+
+.muted{ color: var(--muted); }
+
+
+
+
+/* Special Cards with Frames and Hover effect */
+/* === Framed card base === */
+.frame-card{ position:relative; padding:12px; background:transparent; }
+.frame-card strong{ display:block; margin-top:10px; }
+.frame-card p{ margin:6px 0 0; }
+
+.frame-card__stage{
+  position:relative; width:100%; aspect-ratio: var(--ar,4/3);
+  border-radius:16px; overflow:visible; isolation:isolate;
+  /* tweak knobs (defaults) */
+  --back-x:0px; --back-y:0px; --back-scale:0.5; --back-rot:0deg;
+  --img-x:0px;  --img-y:0px;  --img-scale:0.5;  --img-rot:0deg;
+  --frame-x:0px;--frame-y:0px;--frame-scale:1;--frame-rot:0deg;
+  --t-origin:center;
+  transition: transform 0.35s ease;
+  will-change: transform;
+}
+
+/* Stop using pseudos for images (prevents accidental frame scaling) */
+.frame-card__stage::before,
+.frame-card__stage::after { content: none !important; background: none !important; }
+
+/* main + hover images stay fixed underneath */
+.swap-main,
+.swap-hover {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 0.35s ease;
+  z-index: 1;
+}
+.swap-main { background-image: var(--img); opacity: 1; 
+             transform: scale(var(--img-scale, 1)) rotate(var(--img-rot, 0deg));}
+.swap-hover { background-image: var(--img-hover, var(--img)); 
+              opacity: 0; 
+              transform: scale(var(--hover-scale, 1)) rotate(var(--hover-rot, 0deg));}
+
+/* FRAME (the one that zooms) */
+.frame-card__stage-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background-image: var(--frame);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  transition: transform 0.35s ease;
+  will-change: transform;
+}
+
+/* HOVER EFFECT */
+.frame-card:hover .swap-main  { opacity: 0; }
+.frame-card:hover .swap-hover { opacity: 1; }
+.frame-card:hover .frame-card__stage-overlay {
+  transform: scale(1.06);  /* <-- only the frame zooms */
+}
+
+
+
+/* --- CONTACT section layout --- */
+.contact a {
+  color: var(--darkgreen); /* your desired color */
+  text-decoration: none; /* optional */
+}
+.contact a:hover {
+  color: var(--lightgreen); /* hover color */
+  transform: scale(1.5);
+}
+
+.contact-links {
+  display: flex;
+  justify-content: flex-start;  /* centers all icons horizontally */
+  align-items: center;
+  gap: 20px;                 /* spacing between icons */
+  margin-top: 16px;
+  margin-left: 8px;
+}
+/* --- ICON appearance --- */
+.contact-links i {
+  width: 40px;
+  height: 40px;
+  color: #AEC4D0;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+/* --- Hover effect on links --- */
+.contact-links a:hover i {
+  color: #AEC4D0;
+  transform: scale(1.1);
+}
+
+
+
+
+/* --- Modal --- */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;            /* toggled by .is-open */
+  z-index: 1000;
+}
+.modal.is-open { display: block; }
+
+.modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(2px);
+}
+
+.modal__dialog {
+  position: relative;
+  max-width: 720px;
+  margin: 6vh auto;
+  background: var(--bg);
+  color: var(--fg);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.35);
+}
+
+.modal__close {
+  position: absolute;
+  top: 10px; right: 12px;
+  font-size: 28px; line-height: 1;
+  background: transparent;
+  color: var(--fg);
+  border: 0; cursor: pointer;
+}
+
+.modal__media {
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 16px;
+}
+
+.modal__title { margin: 6px 0 8px; font-size: 22px; }
+.modal__desc { color: var(--muted); margin: 0; }
+
+/* prevent body scroll when modal open */
+body.modal-open { overflow: hidden; }
+
+
+
+
+
+
+/* ====== SECTION WRAPPER ====== */
+.sticker-section {
+position: relative;
+width: min(100%, 1200px);
+height: clamp(420px, 72vh, 820px);
+border-radius: 0px;
+background: var(--blueish);
+/* box-shadow: 0 30px 80px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.06); */
+overflow: clip;
+isolation: isolate;
+margin-inline: auto;
+}
+
+
+/* Subtle grid to help manual positioning (toggle by adding .debug to .sticker-section) */
+.sticker-section.debug::before {
+content: "";
+position: absolute; inset: 0; z-index: 0;
+background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+background-size: 40px 40px;
+pointer-events: none;
+}
+
+
+/* ====== CENTER COPY ====== */
+.center-copy {
+position: absolute; inset: 0; display: grid; place-items: center; z-index: 2;
+/* move down */
+transform: translateY(30%);
+pointer-events: none; /* allow hover to pass through */
+}
+.copy-card {
+max-width: min(520px, 80%);
+text-align: center;
+backdrop-filter: blur(6px) saturate(110%);
+/* background: color-mix(in oklab, #10101a 70%, transparent); */
+/* border: 1px solid rgba(255,255,255,.08); */
+border-radius: 20px;
+padding: 20px 22px;
+/* box-shadow: 0 12px 40px rgba(0,0,0,.35); */
+}
+.copy-card h2 {
+margin: 0 0 6px;
+font-size: clamp(22px, 2.2vw + 10px, 36px);
+letter-spacing: -0.02em;
+}
+.copy-card p {
+margin: 0; color: var(--muted);
+font-size: clamp(14px, 1.2vw + 8px, 18px);
+}
+
+
+/* ====== STICKERS ====== */
+.sticker {
+  position: absolute; z-index: 1; display: block;
+  width: var(--w, 90px);
+  left: var(--x, 50%); top: var(--y, 50%);
+  transform: translate(-50%, -50%) rotate(var(--r, 0deg));
+  transition: transform 220ms ease, filter 220ms ease, box-shadow 220ms ease;
+  filter: drop-shadow(0 12px 18px rgba(0,0,0,.28));
+  cursor: pointer;
+  user-select: none; -webkit-user-drag: none;
+  outline: none; /* we'll handle focus styling */
+}
+.sticker-me {
+  position: absolute; z-index: 1; display: block;
+  width: var(--w, 90px);
+  left: var(--x, 50%); top: var(--y, 50%);
+  transform: translate(-50%, -50%) rotate(var(--r, 0deg));
+  transition: transform 220ms ease, filter 220ms ease, box-shadow 220ms ease;
+  /* filter: drop-shadow(0 12px 18px rgba(0,0,0,.28)); */
+  cursor: pointer;
+  user-select: none; -webkit-user-drag: none;
+  outline: none; /* we'll handle focus styling */
+}
+
+.sticker-me:hover {
+  position: absolute; z-index: 1; display: block;
+  width: var(--w, 90px);
+  left: var(--x, 50%); top: var(--y, 50%);
+  transform: translate(-50%, -50%) rotate(var(--r, 0deg));
+  transition: transform 220ms ease, filter 220ms ease, box-shadow 220ms ease;
+  /* filter: drop-shadow(0 12px 18px rgba(0,0,0,.28)); */
+  cursor: pointer;
+  user-select: none; -webkit-user-drag: none;
+  outline: none; /* we'll handle focus styling */
+}
+
+.sticker:hover,
+.sticker:focus-visible,
+.sticker.is-active {
+transform: translate(-50%, -50%) rotate(0deg) scale(1.08);
+filter: drop-shadow(0 26px 40px rgba(0,0,0,.36)) saturate(112%);
+}
+.sticker:focus-visible {
+box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 60%, transparent);
+border-radius: 12px;
+}
+
+
+/* ====== SMALL SCREEN TWEAKS ====== */
+@media (max-width: 1200px) {
+.sticker-section { height: clamp(520px, 88vh, 900px); 
+                    margin:0 autp;}
+.sticker { width: calc(var(--w, 90px) * .85); }
+}
