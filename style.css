@@ -314,7 +314,7 @@ pointer-events: none;
 .center-copy {
 position: absolute; inset: 0; display: grid; place-items: center; z-index: 2;
 /* move down */
-transform: translateY(30%);
+transform: translateY(35%);
 pointer-events: none; /* allow hover to pass through */
 }
 .copy-card {
