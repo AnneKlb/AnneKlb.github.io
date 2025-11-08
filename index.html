@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>My Minimensch</title>
+    <title>Annekathrin Kolb</title>
     <link rel="stylesheet" href="style.css">
 
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -38,8 +38,8 @@
               <button data-target="#contact">Contact</button>
             </div>
           </header>
-          <h1 class="hero">My Minimensch</h1>
-          <p class="lead">Blah Blah Blah.</p>
+          <h1 class="hero">Annekathrin Kolb</h1>
+          <p class="lead">Media Designerin, Marketing, Kommunikation</p>
           <section id="contact-icons" class="contact">
             <div class="contact-links">
               <a href="mailto:mag.dierking@gmail.com" title="Email" target="_blank">
@@ -75,6 +75,21 @@
           <div class="cards">
             <!-- Card Boelle Bande-->
             <article class="frame-card"
+              data-modal-title="Bölle Bande Reloaded"
+              data-modal-link="projects/boelle-bande.html"
+              data-modal-tags="Multisensorisches Lernen, Individuelle Lernanpassung, Gamification, Technologiegestütztes Lernen"
+              data-stat-Thema="Reaktivierung und Neugestaltung des Jugendclubs „Bölle Bande“ zur stärkeren Einbindung von Kindern und Jugendlichen in den Verein."
+              data-stat-Art="Eventmanagement und Konzeptentwicklung, kombiniert mit Kommunikationsmaßnahmen."
+              data-stat-Aufgabenbereiche="Research, Analyse der Zielgruppe, Konzeption, Projektmanagement, Eventplanung, Design, Kommunikation"
+              data-stat-Team="Gruppenprojekt (5 Personen)"
+              data-modal-desc="
+                Das Projekt Bölle Bande Reloaded wurde ins Leben gerufen, um Jugendlichen zwischen 13 und 18 Jahren einen sicheren Raum zu bieten, in dem sie ihre Freizeit aktiv und kreativ gestalten können. 
+
+                Ziel war es, den Jugendlichen mehr als nur einen Ort für Freizeitaktivitäten zu bieten. Sie sollten die Möglichkeit bekommen, eigene Projekte zu entwickeln, Verantwortung zu übernehmen und ihre Kreativität in einem Umfeld auszuleben, das von positiven Werten geprägt ist.
+
+                Im Rahmen des Projekts wurde ein inklusiver Raum konzipiert, in dem die Jugendlichen nicht nur ihre Freizeit verbringen, sondern auch die Möglichkeit hatten, ihre Meinung zu äußern und aktiv an der Gestaltung des Angebots mitzuwirken. 
+                Das Projekt setzt auf Teamarbeit, Selbstständigkeit und das Erlernen neuer Fähigkeiten in einem sicheren und unterstützenden Umfeld.
+                "
               style="--ar:4/3; --back:url('media/4.png');
                     --img:url('media/darmstadt/painting_2.png'); --img-hover:url('media/darmstadt/darmstadt.png');
                     --frame:url('media/1.png');">
@@ -100,9 +115,21 @@
               <div class="modal__overlay" data-close-modal></div>
               <div class="modal__dialog" role="document" aria-labelledby="projectModalTitle">
                 <button class="modal__close" type="button" aria-label="Close" data-close-modal>&times;</button>
+
                 <div class="modal__media" id="projectModalImage" aria-hidden="true"></div>
-                <h3 class="modal__title" id="projectModalTitle"></h3>
-                <p class="modal__desc" id="projectModalDesc"></p>
+                <h2 class="modal__title" id="projectModalTitle"></h2>
+                <!-- NEW: tags/badges row -->
+                <div class="modal__badges" id="projectModalBadges" aria-hidden="true"></div>
+
+                <!-- NEW: grid with stats (left) + text (right) -->
+                <div class="modal__grid">
+                  <div class="modal__stats" id="projectModalStats" aria-label="Project details"></div>
+                  <div class="modal__text">
+                    <p class="modal__desc" id="projectModalDesc"></p>
+                  </div>
+                </div>
+                <button class="modal__more" id="projectModalMore" type="button">More information</button>
+
               </div>
             </div>
             <!-- Card Fopo-->

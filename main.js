@@ -76,12 +76,40 @@ lucide.createIcons();
 
 
 
-// --- Project Card Modal ---
 (function () {
   const modal = document.getElementById('projectModal');
   const imgBox = document.getElementById('projectModalImage');
   const titleBox = document.getElementById('projectModalTitle');
   const descBox = document.getElementById('projectModalDesc');
+  const badgesBox = document.getElementById('projectModalBadges');
+  const statsBox  = document.getElementById('projectModalStats');
+  const moreBtn = document.getElementById('projectModalMore');
+
+  // Small helpers (concise)
+  function renderBadges(csv){
+    badgesBox.innerHTML = '';
+    const tags = (csv||'').split(',').map(t=>t.trim()).filter(Boolean);
+    if(!tags.length){ badgesBox.setAttribute('aria-hidden','true'); return; }
+    badgesBox.removeAttribute('aria-hidden');
+    tags.forEach(t=>{
+      const b = document.createElement('span');
+      b.className = 'modal__badge';
+      b.textContent = t;
+      badgesBox.appendChild(b);
+    });
+  }
+  function renderStats(obj){
+    statsBox.innerHTML = '';
+    const entries = Object.entries(obj).filter(([,v]) => v && String(v).trim() !== '');
+    if(!entries.length) return;
+    const dl = document.createElement('dl');
+    entries.forEach(([k,v])=>{
+      const dt = document.createElement('dt'); dt.textContent = k;
+      const dd = document.createElement('dd'); dd.textContent = v;
+      dl.appendChild(dt); dl.appendChild(dd);
+    });
+    statsBox.appendChild(dl);
+  }
 
   function getCssVar(el, name) {
     const v = getComputedStyle(el).getPropertyValue(name).trim();
@@ -89,30 +117,61 @@ lucide.createIcons();
   }
 
   function openModalFromCard(card) {
-    // Find pieces inside the card
-    const stage = card.querySelector('.frame-card__stage');
+    const stage   = card.querySelector('.frame-card__stage');
     const heading = card.querySelector('strong');
-    const para = card.querySelector('p');
+    const para    = card.querySelector('p');
 
-    // Pull values
-    const title = (heading?.textContent || 'Project').trim();
-    const desc = (para?.textContent || '').trim();
+    // Title: prefer data-modal-title, else data-project, else <strong>, else empty
+    const project = (card.dataset.project || '').trim();
+    const title = (card.dataset.modalTitle || project || heading?.textContent || '').trim();
 
-    // The image comes from the CSS var --img in the stage
-    // It looks like: url("media/1.png") — we can feed that straight to background-image
+    const desc  = (card.dataset.modalDesc || para?.textContent || '').trim();
+
+    const link  = card.dataset.modalLink || ''; // For page view
+
+    // --- Customizable stats ---
+    // 1) Start with JSON blob if provided: data-stats='{"Client":"…","Year":"…"}'
+    let stats = {};
+    if (card.dataset.stats) {
+      try { stats = JSON.parse(card.dataset.stats); } catch { /* ignore malformed */ }
+    }
+    // 2) Merge any data-stat-* attributes (e.g., data-stat-role, data-stat-location)
+    for (const [k, v] of Object.entries(card.dataset)) {
+      if (!k.startsWith('stat') || !v) continue;      // e.g., statRole, statLocation
+      const label = k.slice(4)                         // "Role"
+        .replace(/^[a-z]/, c => c.toUpperCase())       // role -> Role
+        .replace(/([A-Z])/g, ' $1')                    // clientName -> Client Name
+        .trim();
+      stats[label] = v;
+    }
+    // 3) Ensure Project name is present (unless user already set it)
+    if (project && !stats.Project) stats.Project = project;
+
+    // Image (unchanged)
     const bgVar = getCssVar(stage, '--img') || "url('')";
     imgBox.style.backgroundImage = bgVar;
 
     // Fill content
-    titleBox.textContent = title;
-    descBox.textContent = desc;
+    titleBox.textContent = title || project || '';
+    descBox.textContent  = desc;
 
-    // Show modal
+    // Render badges/stats (your helpers)
+    renderBadges(card.dataset.modalTags || '');
+    renderStats(stats);
+
+    // set button link
+    if (link) {
+      moreBtn.style.display = 'block';
+      moreBtn.onclick = () => window.location.href = link;
+    } else {
+      moreBtn.style.display = 'none';
+      moreBtn.onclick = null;
+    }
+
+    // Open (unchanged)
     modal.classList.add('is-open');
     document.body.classList.add('modal-open');
     modal.setAttribute('aria-hidden', 'false');
-
-    // Focus the close button for accessibility
     modal.querySelector('.modal__close').focus();
   }
 
@@ -243,3 +302,4 @@ if (meSticker) {
     meSticker.src = originalSrc;
   });
 }
+
