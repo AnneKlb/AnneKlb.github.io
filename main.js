@@ -70,6 +70,12 @@ lucide.createIcons();
   ro.observe(document.documentElement);
   window.addEventListener('DOMContentLoaded', layoutAll);
   window.addEventListener('orientationchange', layoutAll, {passive:true});
+
+  window.addEventListener('pageshow', (e) => {
+    // e.persisted === true means "restored from bfcache", 
+    // but calling layoutAll() always is harmless:
+    layoutAll();
+  });
 })();
 
 
@@ -210,11 +216,18 @@ lucide.createIcons();
 })();
 
 
+// -------------------------------
+// ------  Projects Section  ------
+// -------------------------------
+document.getElementById("projectModalMore").onclick = () => {
+  window.location.href = "projects/boelle-bande.html";
+};
 
 
+// -------------------------------
+// ------  Sticker Section  ------
+// -------------------------------
 
-
-// --- Sticker Section ---
 const stickers = Array.from(document.querySelectorAll('.sticker'));
 const titleEl = document.getElementById('copyTitle');
 const textEl = document.getElementById('copyText');

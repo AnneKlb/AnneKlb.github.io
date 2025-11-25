@@ -28,14 +28,14 @@
         <div class="container">
           <header class="nav-bar">
             <div class="nav-left">
-              <span class="dot"></span>
-              <strong>/home</strong>
+              <!-- <span class="dot"></span>
+              <strong>/home</strong> -->
             </div>
             <div class="nav-buttons">
-              <button data-target="#about">About</button>
-              <button data-target="#projects">Projects</button>
-              <button data-target="#notes">?</button>
-              <button data-target="#contact">Contact</button>
+              <button data-target="#projects">Projekte</button>
+              <button data-target="#about">Über Mich</button>
+              <!-- <button data-target="#notes">?</button> -->
+              <button data-target="#contact">Kontakt</button>
             </div>
           </header>
           <h1 class="hero">Annekathrin Kolb</h1>
@@ -60,7 +60,7 @@
 
     <!-- PROJECTS SECTION -->
     <section id="projects" class="bg-section">
-      <div class="section-stage" style="--design-w: 1200px; --design-h: 1600px; --bg-color:#F5F1E9;">
+      <div class="section-stage" style="--design-w: 1200px; --design-h: 1600px; --bg-color:#F5F1E9; z-index:-1;">
         <div class="section-stage__inner">
           <!-- LAYERS -->
            <img class="layer"
@@ -71,7 +71,7 @@
 
 
         <div class="container cards-wrap">
-          <h2>Projects</h2>
+          <!-- <h2>Projects</h2> -->
           <div class="cards">
             <!-- Card Boelle Bande-->
             <article class="frame-card"
@@ -128,7 +128,8 @@
                     <p class="modal__desc" id="projectModalDesc"></p>
                   </div>
                 </div>
-                <button class="modal__more" id="projectModalMore" type="button">More information</button>
+                <button class="modal__more" id="projectModalMore" type="button">More information
+                </button>
 
               </div>
             </div>
@@ -169,7 +170,7 @@
                     /* main image (default state) */
                     --img-x:0px; --img-y:-0px; --img-scale:0.75; --img-rot:0deg;
                     /* hover image (if different alignment) */
-                    --hover-x:-10px; --hover-y:0px; --hover-scale:0.75; --hover-rot:-0deg;
+                    --hover-x:-0px; --hover-y:0px; --hover-scale:0.75; --hover-rot:-0deg;
                     /* frame overlay (usually identity, but adjustable) */
                     --frame-x:0px; --frame-y:0px; --frame-scale:0.5; --frame-rot:0deg;
                   ">
@@ -236,9 +237,9 @@
                     /* background */
                     --back-x:-4px; --back-y:2px; --back-scale:0.2; --back-rot:10deg;
                     /* main image (default state) */
-                    --img-x:0px; --img-y:-0px; --img-scale:0.7; --img-rot:0deg;
+                    --img-x:0px; --img-y:-0px; --img-scale:0.73; --img-rot:0deg;
                     /* hover image (if different alignment) */
-                    --hover-x:0px; --hover-y:0px; --hover-scale:0.7; --hover-rot:0deg;
+                    --hover-x:0px; --hover-y:0px; --hover-scale:0.73; --hover-rot:0deg;
                     /* frame overlay (usually identity, but adjustable) */
                     --frame-x:0px; --frame-y:0px; --frame-scale:0.5; --frame-rot:0deg;
                   ">
@@ -254,22 +255,7 @@
       </div>
     </section>
 
-    <!-- ABOUT SECTION -->
-    <!-- <section id="about" class="bg-section"> -->
-      <!-- <div class="section-stage" style="--design-w: 1200px; --design-h: 340px; --bg-color:#AEC4D0;"> -->
-        <!-- <div class="section-stage__inner"> -->
-          <!-- LAYERS (example different offsets) -->
-        <!-- <img class="layer" -->
-            <!-- src="media/Allgemeine-Grafiken/me.png" alt="" -->
-            <!-- style="--z:1; --alpha:1.0; --x:0px; --y:0px; --sx:1; --sy:1.0;" /> -->
-          <!-- CONTENT -->
-          <!-- <div class="container"> -->
-            
-            <!-- </p> -->
-          <!-- </div> -->
-        <!-- </div> -->
-      <!-- </div> -->
-    <section class="sticker-section" aria-label="Interactive sticker wall" >
+    <section class="sticker-section" id="about" aria-label="Interactive sticker wall" >
       <!-- Central copy -->
       <div class="center-copy" aria-live="polite" aria-atomic="true">
       <div class="copy-card">
