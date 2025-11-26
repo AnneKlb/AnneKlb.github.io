@@ -9,10 +9,11 @@
     const cs = getComputedStyle(stage);
     const designW = parseFloat(cs.getPropertyValue('--design-w')) || 1200;
     const sectionW = sectionEl.getBoundingClientRect().width;
-    const scale = Math.min(1, sectionW / designW);
+    const scale = sectionW / designW; //Math.min(1, sectionW / designW);
 
     // put the scale on the section (cascades to stage + inner)
     sectionEl.style.setProperty('--stage-scale', String(scale));
+    stage.style.setProperty('--stage-scale', String(scale));
   }
 
   function layoutAll(){

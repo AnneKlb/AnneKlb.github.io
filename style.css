@@ -1,5 +1,5 @@
 :root{
-  --content-max: 1200px;
+  --content-max: 1600px;
   --content-pad: 24px;
   --bg: #0b0f16;
   --fg: #f3f3f3;
@@ -57,10 +57,12 @@ body{
   transform: scale(var(--stage-scale, 1));
   z-index: 0; 
 }
-.section-stage__inner .container { max-width: none; width: var(--design-w); }
+.section-stage__inner .container { 
+  max-width: none; 
+  width: 100%; }
 /* let stage height follow the bigger of bg or cards */
 .section-stage{
-  width: min(100%, var(--design-w, 1200px));
+  width: 100%;/*min(100%, var(--design-w, 1200px));*/
   --bg-h: calc(var(--design-h,720px) * var(--stage-scale,1));
   height: max(var(--bg-h), var(--cards-h, 0px));
   position:relative; margin:0 auto; overflow:hidden;
@@ -91,7 +93,7 @@ body{
 .container{
   position: relative;
   z-index: 10;
-  max-width: max(var(--content-max), var(--design-w, 1200px));
+  max-width: max(var(--content-max), var(--design-w, 1800px));
   margin: 0 auto;
   padding: calc(var(--content-pad) * 2) var(--content-pad);
 }
@@ -370,7 +372,7 @@ body.modal-open { overflow: hidden; }
 
 .sticker-section {
   position: relative;
-  width: min(100%, 1200px);
+  width: 100%;/*min(100%, 1200px);*/
   height: clamp(520px, 88vh, 900px);
   border-radius: 0px;
   background: var(--blueish) !important;
